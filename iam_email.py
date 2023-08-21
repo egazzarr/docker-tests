@@ -1,5 +1,7 @@
 import requests, json, os
 import configparser
+import pandas as pd
+
 
 config = configparser.ConfigParser()
 path=os.path.join(os.getcwd(),'iam.ini')
@@ -33,5 +35,6 @@ for user in data['Resources']:
 with open('emails.json', 'w+') as fp:
     fp.write(json.dumps(results))
 
-for user in results:
-    flask reana-admin token-grant -e user --admin-access-token $REANA_ACCESS_TOKEN
+df = pd.read_json ('emails.json')
+emails_txt=df.to_csv ('emails.txt', index = False)
+print(emails_txt)
