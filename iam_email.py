@@ -37,4 +37,4 @@ with open('emails.json', 'w+') as fp:
 
 df = pd.read_json ('emails.json')
 emails_txt=df.to_csv ('emails.txt', index = False)
-print(emails_txt)
+print(results)
