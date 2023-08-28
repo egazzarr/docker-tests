@@ -39,5 +39,5 @@ while startIndex < response['totalResults']:
         startIndex+=1
     print(startIndex)
 
-with open('emails.json', 'w+') as fp:
+with open('/home/emails.json', 'w+') as fp:
     fp.write(json.dumps(results))

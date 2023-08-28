@@ -13,7 +13,7 @@ client_id = os.environ['CLIENT_ID']
 client_secret  = os.environ['CLIENT_SECRET']  
 reana_admin_token = os.environ['REANA_ADMIN_TOKEN']
 
-with open('emails.json', 'r') as file:
+with open('/home/emails.json', 'r') as file:
     j = json.load(file)
     print(j)
 for i in j:
