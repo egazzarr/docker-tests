@@ -12,5 +12,5 @@ RUN pip install -r /home/requirements.txt
 # install kubectl 
 RUN apt-get update && apt-get install -y kubectl
 
-ENTRYPOINT ["/bin/bash"]
+# ENTRYPOINT ["/bin/bash"]
 
