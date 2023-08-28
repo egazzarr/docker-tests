@@ -1,7 +1,7 @@
 import requests, json, os
 
 client_id = os.environ['CLIENT_ID']
-client_secret  = os.environbb['CLIENT_SECRET']  
+client_secret  = os.environ['CLIENT_SECRET']  
       
 print(client_id)
 token_resp = requests.post(
