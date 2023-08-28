@@ -5,7 +5,7 @@ FROM reanahub/reana-server:${BASETAG}
 LABEL maintainer="E. Gazzarrini"
 
 # Workdir is /home
-COPY requirements.txt iam_email.py iam.ini /home/
+COPY requirements.txt add_reana_users.py generate_email_list.py iam.ini /home/
 
 RUN pip install -r /home/requirements.txt
 
