@@ -6,6 +6,7 @@ import pandas as pd
 config = configparser.ConfigParser()
 path=os.path.join(os.getcwd(),'/home/iam.ini')
 config.read(path)
+print(cfg.get('IAM', 'client_id', vars=os.environ))
 client_id = config['IAM']['client_id']
 client_secret = config['IAM']['client_secret']
 
