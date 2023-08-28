@@ -1,21 +1,7 @@
 import requests, json, os
-import configparser
-import pandas as pd
-
-
-config = configparser.ConfigParser()
-path=os.path.join(os.getcwd(),'/home/iam.ini')
-config.read(path)
-
-# client_id = config['IAM']['client_id']
-# client_secret = config['IAM']['client_secret']
-
-print(os.environ['IAM_SERVER'])
-print(os.environ['CLIENT_SECRET'])
-print(os.environ['CLIENT_ID'])
 
 client_id = os.environ['CLIENT_ID']
-client_secret  = os.environ['CLIENT_SECRET']  
+client_secret  = os.environbb['CLIENT_SECRET']  
       
 print(client_id)
 token_resp = requests.post(
