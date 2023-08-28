@@ -9,6 +9,7 @@ config.read(path)
 client_id = config['IAM']['client_id']
 client_secret = config['IAM']['client_secret']
 
+print(client_id)
 token_resp = requests.post(
     "https://iam-escape.cloud.cnaf.infn.it/token",
     data={
@@ -23,18 +24,26 @@ token_resp = requests.post(
 token_json = token_resp.json()
 token = token_json['access_token']
 headers = {"Authorization": "Bearer %s" % token}
-
-results = []
-
 list_url = "https://iam-escape.cloud.cnaf.infn.it/scim/Users"
-resp = requests.get(list_url, headers=headers)
+
+startIndex = 1
+results = []
+resp = requests.get(list_url, headers=headers, params={"startIndex": startIndex})
 data = resp.json()
-for user in data['Resources']:
-    for email in user['emails']:
+response = json.loads(resp.text)
+
+# need to do this as iam return sonly first 100 results 
+
+while startIndex < response['totalResults']:
+    resp = requests.get(list_url, headers=headers, params={"startIndex": startIndex})
+    data = resp.json()
+    response = json.loads(resp.text)
+    for user in data['Resources']:
+        for email in user['emails']:
             results.append(email['value'])
+            print(email['value'])
+        startIndex+=1
+    print(startIndex)
+
 with open('emails.json', 'w+') as fp:
     fp.write(json.dumps(results))
-
-df = pd.read_json ('emails.json')
-emails_txt=df.to_csv ('emails.txt', index = False)
-print(results)
