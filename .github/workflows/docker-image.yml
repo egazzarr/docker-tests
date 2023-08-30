@@ -2,13 +2,18 @@ name: reana-iam-docker
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: 
+      - main
+    paths:
+      - reana-iam-sync/**
+
 env:
+  CONTAINER: iam-reana-sync
+  # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
-  
+  # github.repository as <account>/<repo>
+  IMAGE_NAME: ${{ github.repository }}-$CONTAINER
+
 jobs:
 
   build-and-push-image:
