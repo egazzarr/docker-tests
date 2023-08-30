@@ -14,8 +14,6 @@ WORKDIR /opt
 COPY packages packages
 COPY requirements.txt /opt
 
-RUN pip install -r /opt/requirements.txt
-
 # Necessary to switch temporarily to root user from the default user of Pangeo
 # image
 USER root
@@ -28,6 +26,8 @@ RUN apt-get update -qq \
  && rm -f ${ROOT_BIN} \
  && echo /opt/root/lib >> /etc/ld.so.conf \
  && ldconfig
+
+RUN pip install -r /opt/requirements.txt
 
 # Switch back to default user
 USER 1000
