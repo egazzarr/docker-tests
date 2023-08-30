@@ -41,7 +41,7 @@ jobs:
 
       - name: Build and push Docker image
         id: build-and-push
-        
+        working-directory: ${{ env.CONTAINER }}
         run: |
           git clone https://github.com/egazzarr/docker-tests.git
           cd docker-tests
