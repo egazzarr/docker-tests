@@ -6,3 +6,4 @@ At the moment, the users subscribe to IAM and get automatic access to Rucio. The
 The python scripts:
 -  `generate_email_list.py` fetches the email list of all IAM subscribed users and gets a .json list of all of them. In order to poll the IAM service to get all results, a workaround is needed as usually the basic script would only return the first 100 results. 
 - `add_reana_users.py` reads the email list and executes a flask command to add the users to the Reana DB, and assigns a token to them. This token has infinite lifetime, so it is not the most secure solution. The Reana team is working on the implementation of an OAuth identification, after which this cotnainer and functionality will become obsolete.  
+ 
