@@ -1,4 +1,4 @@
-import requests, json, os
+import requests, json, os 
 
 client_id = os.environ['CLIENT_ID']
 client_secret  = os.environ['CLIENT_SECRET']  
