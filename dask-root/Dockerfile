@@ -11,7 +11,7 @@ ARG ROOT_BIN=root_v6.28.00.Linux-ubuntu22-x86_64-gcc11.3.tar.gz
 WORKDIR /opt
 
 COPY packages packages
-COPY requirements.txt 
+COPY requirements.txt /opt
 
 RUN pip install -r /opt/requirements.txt
 
