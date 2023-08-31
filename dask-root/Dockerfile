@@ -1,6 +1,5 @@
-ARG BASETAG=2023.8.1-py3.9
-# ARG BASETAG=2023.2.1-py3.8
- 
+ARG BASETAG=2023.8.1-py3.10
+
 # To be changed to specific version+hsa
 FROM ghcr.io/dask/dask-notebook:${BASETAG}
 LABEL maintainer="E. Gazzarrini"
