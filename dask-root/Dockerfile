@@ -7,7 +7,7 @@ LABEL maintainer="E. Gazzarrini"
 
 ENV LANG=C.UTF-8
 
-ARG ROOT_BIN=root_v6.28.00.Linux-ubuntu22-x86_64-gcc11.3.tar.gz
+ARG ROOT_BIN=root_v6.28.06.Linux-ubuntu22-x86_64-gcc11.4.tar.gz
 
 WORKDIR /opt
 
