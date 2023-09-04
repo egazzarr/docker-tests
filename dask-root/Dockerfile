@@ -29,7 +29,8 @@ RUN apt-get update -qq \
 RUN pip install -r /opt/requirements.txt
 
 # Switch back to default user
-USER 1000
+# USER 1000
+USER $NB_USER
 
 ENV ROOTSYS /opt/root
 ENV PATH $ROOTSYS/bin:$PATH
