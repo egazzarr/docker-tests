@@ -43,6 +43,8 @@ for email in new_users:
             )
         except subprocess.CalledProcessError as e:
             print(e.stderr)
+    else:
+        print("No new users to import")
 
 
 # with open('/home/emails.json', 'r') as file:
