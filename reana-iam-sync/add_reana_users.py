@@ -36,7 +36,7 @@ for email in new_users:
         try:
             subprocess.check_output(
                 [
-                    f"flask reana-admin user-create --email {i} --admin-access-token {reana_admin_token}"
+                    f"flask reana-admin user-create --email {email} --admin-access-token {reana_admin_token}"
                 ],
                 shell=True,
                 encoding="utf-8",
