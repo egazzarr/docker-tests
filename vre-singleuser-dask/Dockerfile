@@ -48,10 +48,10 @@ RUN jupyter serverextension enable --py swanoauthrenew --sys-prefix
 RUN pip install reana-client>=0.9.0 
 RUN pip install ipykernel
 
-RUN pip install bokeh \
-    && pip install dask \
-    && pip install dask-gateway \
-    && pip install dask-labextension
+RUN pip install bokeh==3.2.2 \
+    && pip install dask==2023.9.2 \
+    && pip install dask-gateway==2023.1.1 \
+    && pip install dask-labextension==7.0.0
 
 USER root
 
