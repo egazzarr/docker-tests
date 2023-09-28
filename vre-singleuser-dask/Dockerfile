@@ -4,7 +4,9 @@ LABEL org.opencontainers.image.source https://github.com/vre-hub/environments
 ARG BUILD_DATE
 LABEL org.label-schema.build-date=$BUILD_DATE
 
+USER $NB_UID
 
-RUN git clone https://github.com/egazzarr/docker-tests/vre-singleuser-dask/ \
-    && cd ${HOME}/vre-singleuser-dask/ \
-    && pip install --no-cache -r requirements.txt 
+RUN pip install bokeh==3.2.2 \
+    && pip install dask==2023.9.2 \
+    && pip install dask-gateway==2023.1.1 \
+    && pip install dask-labextension==7.0.0
