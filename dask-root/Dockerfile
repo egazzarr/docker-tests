@@ -41,7 +41,7 @@ ENV PATH $ROOTSYS/bin:$PATH
 ENV PYTHONPATH $ROOTSYS/lib:$PYTHONPATH
 ENV CLING_STANDARD_PCH none
 
-CMD ["root", "-b"]
+# CMD ["root", "-b"]
 
 
  
