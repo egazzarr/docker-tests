@@ -1,0 +1,9 @@
+CONDOR_HOST = tweetybird03.cern.ch, tweetybird04.cern.ch
+COLLECTOR_HOST = tweetybird03.cern.ch, tweetybird04.cern.ch
+SCHEDD_HOST = bigbird22.cern.ch
+SCHEDD_NAME = $(SCHEDD_HOST)
+SEC_CLIENT_AUTHENTICATION_METHODS = KERBEROS
+SEC_CREDENTIAL_PRODUCER = /usr/bin/batch_krb5_credential
+CREDD_HOST = $(SCHEDD_HOST)
+FILESYSTEM_DOMAIN = cern.ch
+UID_DOMAIN = cern.ch
