@@ -6,7 +6,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE
 
 WORKDIR $HOME
 USER root
-# USER $NB_UID
+USER $NB_UID
 # COPY --chown=1000:100 ./ /home/$NB_USER/
 
 # RUN pip install bokeh==3.2.2 \
@@ -22,3 +22,10 @@ RUN pip install dask>=2023.5.1 \
     && pip uninstall -y bokeh \
     && pip install bokeh>=3.0.0 \
     # && pip install dask-labextension>=6.1.0
+    
+ENV JUPYTER_ENABLE_LAB=yes 
+
+WORKDIR $HOME
+USER $NB_UID
+
+CMD ["setup.sh", "start-notebook.sh"]
