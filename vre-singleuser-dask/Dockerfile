@@ -4,9 +4,10 @@ LABEL org.opencontainers.image.source https://github.com/vre-hub/environments
 ARG BUILD_DATE
 LABEL org.label-schema.build-date=$BUILD_DATE
 
-# WORKDIR $HOME
-USER $NB_UID
-COPY --chown=1000:100 ./ /home/$NB_USER/
+WORKDIR $HOME
+USER root
+# USER $NB_UID
+# COPY --chown=1000:100 ./ /home/$NB_USER/
 
 # RUN pip install bokeh==3.2.2 \
 #     && pip install dask==2023.9.2 \
