@@ -19,7 +19,7 @@ RUN pip install dask>=2023.5.1 \
     && pip install dask-gateway>=2022.4.0 \
     && pip install jupyter-server-proxy \
     && jupyter serverextension enable --sys-prefix jupyter_server_proxy \
-    && pip install dask-labextension==6.2.0 \
+    && pip install dask-labextension==6.2.0 
 #     && pip uninstall -y bokeh 
     
 # RUN pip install --upgrade pip
