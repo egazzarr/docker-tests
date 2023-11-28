@@ -6,6 +6,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE
 
 # WORKDIR $HOME
 USER $NB_UID
+RUN sudo chmod -R 777 /home/jovyan/
 
 # RUN pip install bokeh==3.2.2 \
 #     && pip install dask==2023.9.2 \
