@@ -23,7 +23,7 @@ RUN pip install dask>=2023.5.1 \
 #     && pip uninstall -y bokeh 
     
 # RUN pip install --upgrade pip
-RUN pip install bokeh>=2.4.2,<3
+RUN pip install bokeh<3
     
 
 WORKDIR $HOME
