@@ -1,4 +1,4 @@
-FROM ghcr.io/vre-hub/vre-singleuser:sha-40199b2
+FROM ghcr.io/vre-hub/vre-singleuser:sha-423e01a
 LABEL maintainer="VRE Team @ CERN 22/23 - E. Garcia, E. Gazzarrini, D. Gosein"
 LABEL org.opencontainers.image.source https://github.com/vre-hub/environments
 ARG BUILD_DATE
@@ -6,7 +6,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE
 
 # WORKDIR $HOME
 USER $NB_UID
-COPY --chown=1000:100 hostfolder/* /home/$NB_USER/
+COPY --chown=1000:100 home/jovyan/* /home/$NB_USER/
 
 # RUN pip install bokeh==3.2.2 \
 #     && pip install dask==2023.9.2 \
