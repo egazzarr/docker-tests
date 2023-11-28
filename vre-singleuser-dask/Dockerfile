@@ -21,7 +21,7 @@ RUN pip install dask>=2023.5.1 \
     && jupyter serverextension enable --sys-prefix jupyter_server_proxy \
     && pip uninstall -y bokeh \
     && pip install bokeh>=3.0.0 \
-    && pip install dask-labextension>=6.1.0
+    && pip install dask-labextension==6.2.0
 
 WORKDIR $HOME
 USER $NB_UID
