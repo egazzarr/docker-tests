@@ -23,6 +23,7 @@ RUN pip install dask>=2023.5.1 \
     && pip uninstall -y bokeh 
     
 RUN pip install "bokeh>=2.4.2,<3.0.0"
+RUN pip install msgpack
     
 WORKDIR $HOME
 USER $NB_UID
