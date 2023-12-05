@@ -40,7 +40,8 @@ RUN mkdir -p /opt/conda/share/jupyter/kernels/root \
  #RUN conda install -c conda-forge metakernel # conda complains, installing though pip
 RUN pip install metakernel
 
-USER $NB_UID
+# USER $NB_UID
+USER root
 
 RUN conda install -y -c conda-forge python-gfal2 \
     && conda clean --all -f -y
