@@ -1,13 +1,32 @@
-#  VRE singleuser root image
+This image deployed on the [jhub-vre.cern.ch](jhub-vre.cern.ch) allows multiple users to spawn multiple dask clusters by creating a scheduler each time a user asks for it, following the logic o fthe [Dask Gateway](https://gateway.dask.org/). The image is accessible by selecting the environments with 'DASK' in the description at notebooks' start up. It also has the [ROOT software](https://root.cern/about/) for HEP installed. 
 
-This image is based on the CERN [VRE singleuser Base Image](https://github.com/vre-hub/environments/tree/main/vre-singleuser) and the original [ESCAPE Data Lake-as-a-Service Singleuser Base Image](https://gitlab.cern.ch/escape-wp2/docker-images/-/tree/master/datalake-singleuser) with some modifications:
+If you decide to select this image, you can run a notebook and check that you can spawn a cluster by running:
 
- - Python version is downfraded to version 3.8 due to compatibility issues with ROOT.
- - ROOT v6.26.10 is installed.
-    - The image contains aswell a ROOT C++ kernel for JupyterLab.
- - [rucio-jupyterlab](https://pypi.org/project/rucio-jupyterlab) is installed.
+```
+import dask
+import dask.distributed
+from dask_gateway import Gateway
+from dask_gateway import GatewayCluster
+import dask.array as da
+import requests
+from dask_gateway import scheduler_preload
+import os
+```
 
+To check the service of the `dask-gateway` is reachable, run:
 
-## Extending the image
+```
+requests.get("http://traefik-dask-dask-gateway/api/health").content
+```
 
-Follow the same instructions as for the [VRE singleuser Base Image](https://github.com/vre-hub/environments/blob/main/vre-singleuser/README.md).
+And then connect to the Gateway:
+
+```
+gateway = Gateway(address="http://traefik-dask-dask-gateway/",
+    auth="jupyterhub")
+gateway.list_clusters()
+cluster = gateway.new_cluster()
+cluster.scale(4)  # to create 4 worker nodes
+```
+
+You will see the scheduler and the worker pods appearing in the k8s cluster under the `jhub` namespace. 
