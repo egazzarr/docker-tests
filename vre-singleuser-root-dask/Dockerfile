@@ -114,7 +114,7 @@ ENV JUPYTER_ENABLE_LAB=yes
 
 WORKDIR $HOME
 USER root
-USER $NB_UID
+# USER $NB_UID
 
 RUN pip install dask>=2023.5.1 \
     && pip install distributed>=2023.5.1 \
