@@ -37,40 +37,40 @@ ENV CLING_STANDARD_PCH none
 
 ###########################
 # cleanup yum cache
-RUN yum upgrade -y \
-    && yum clean all \
-    && rm -rf /var/cache/yum
+# RUN yum upgrade -y \
+#     && yum clean all \
+#     && rm -rf /var/cache/yum
 
-# install useful tools
-RUN yum -y install git htop wget voms-clients-cpp
-RUN pip install --upgrade pip
+# # install useful tools
+# RUN yum -y install git htop wget voms-clients-cpp
+# RUN pip install --upgrade pip
 
-USER root
+# USER root
 
-# EGI trust anchors
-RUN curl -Lo /etc/yum.repos.d/egi-trustanchors.repo https://repository.egi.eu/sw/production/cas/1/current/repo-files/egi-trustanchors.repo \
-    && yum update -y 
+# # EGI trust anchors
+# RUN curl -Lo /etc/yum.repos.d/egi-trustanchors.repo https://repository.egi.eu/sw/production/cas/1/current/repo-files/egi-trustanchors.repo \
+#     && yum update -y 
 
-RUN yum -y install gfal2* python3-gfal2 xrootd-client voms-clients-java 
-RUN yum -y install ca-certificates ca-policy-egi-core
+# RUN yum -y install gfal2* python3-gfal2 xrootd-client voms-clients-java 
+# RUN yum -y install ca-certificates ca-policy-egi-core
 
-# Install CERN CA certs from CERN maintained mirrors
-# This will add a `CERN-bundle.pem` file (among others) into `/etc/pki/tls/certs/`
-COPY ./linuxsupport7s-stable.repo /etc/yum.repos.d/
-RUN yum install -y CERN-CA-certs
+# # Install CERN CA certs from CERN maintained mirrors
+# # This will add a `CERN-bundle.pem` file (among others) into `/etc/pki/tls/certs/`
+# COPY ./linuxsupport7s-stable.repo /etc/yum.repos.d/
+# RUN yum install -y CERN-CA-certs
 
-# ESCAPE VOMS setup
-RUN mkdir -p /etc/vomses \
-    && wget https://indigo-iam.github.io/escape-docs/voms-config/voms-escape.cloud.cnaf.infn.it.vomses -O /etc/vomses/voms-escape.cloud.cnaf.infn.it.vomses
-RUN mkdir -p /etc/grid-security/vomsdir/escape \
-    && wget https://indigo-iam.github.io/escape-docs/voms-config/voms-escape.cloud.cnaf.infn.it.lsc -O /etc/grid-security/vomsdir/escape/voms-escape.cloud.cnaf.infn.it.lsc
+# # ESCAPE VOMS setup
+# RUN mkdir -p /etc/vomses \
+#     && wget https://indigo-iam.github.io/escape-docs/voms-config/voms-escape.cloud.cnaf.infn.it.vomses -O /etc/vomses/voms-escape.cloud.cnaf.infn.it.vomses
+# RUN mkdir -p /etc/grid-security/vomsdir/escape \
+#     && wget https://indigo-iam.github.io/escape-docs/voms-config/voms-escape.cloud.cnaf.infn.it.lsc -O /etc/grid-security/vomsdir/escape/voms-escape.cloud.cnaf.infn.it.lsc
 
-# Install latest kubectl
-RUN curl -o /usr/bin/kubectl -L https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-RUN chmod +x /usr/bin/kubectl
-########################vvvvv
-# RUN conda install -y -c conda-forge python-gfal2 \
-#     && conda clean --all -f -y
+# # Install latest kubectl
+# RUN curl -o /usr/bin/kubectl -L https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+# RUN chmod +x /usr/bin/kubectl
+# ########################
+RUN conda install -y -c conda-forge python-gfal2 \
+    && conda clean --all -f -y
 
 RUN pip install rucio-jupyterlab>=0.9.8 swanoauthrenew==1.0.1 PyJWT\
     && jupyter serverextension enable --py rucio_jupyterlab --sys-prefix \
@@ -83,35 +83,35 @@ RUN apt update -y \
     && apt install -y build-essential curl \
     && apt install -y voms-clients-java software-properties-common \
     && apt clean -y 
-    # && rm /opt/conda/bin/voms-proxy-init \
-    # && ln -s /usr/bin/voms-proxy-init /opt/conda/bin/voms-proxy-init
+    && rm /opt/conda/bin/voms-proxy-init \
+    && ln -s /usr/bin/voms-proxy-init /opt/conda/bin/voms-proxy-init
 
 # ESCAPE grid-security and VOMS setup
-# RUN wget -q -O - https://dist.eugridpma.info/distribution/igtf/current/GPG-KEY-EUGridPMA-RPM-3 | apt-key add -
+RUN wget -q -O - https://dist.eugridpma.info/distribution/igtf/current/GPG-KEY-EUGridPMA-RPM-3 | apt-key add -
 
 RUN pip install ipykernel
 
-# RUN apt update \
-#     && add-apt-repository 'deb http://repository.egi.eu/sw/production/cas/1/current egi-igtf core' \
-#     && apt -y install ca-certificates ca-policy-egi-core
+RUN apt update \
+    && add-apt-repository 'deb http://repository.egi.eu/sw/production/cas/1/current egi-igtf core' \
+    && apt -y install ca-certificates ca-policy-egi-core
 
-# RUN mkdir -p /etc/vomses \
-#     && wget https://indigo-iam.github.io/escape-docs/voms-config/voms-escape.cloud.cnaf.infn.it.vomses -O /etc/vomses/voms-escape.cloud.cnaf.infn.it.vomses \
-#     && mkdir -p /etc/grid-security/vomsdir/escape \
-#     && wget https://indigo-iam.github.io/escape-docs/voms-config/voms-escape.cloud.cnaf.infn.it.lsc -O /etc/grid-security/vomsdir/escape/voms-escape.cloud.cnaf.infn.it.lsc
+RUN mkdir -p /etc/vomses \
+    && wget https://indigo-iam.github.io/escape-docs/voms-config/voms-escape.cloud.cnaf.infn.it.vomses -O /etc/vomses/voms-escape.cloud.cnaf.infn.it.vomses \
+    && mkdir -p /etc/grid-security/vomsdir/escape \
+    && wget https://indigo-iam.github.io/escape-docs/voms-config/voms-escape.cloud.cnaf.infn.it.lsc -O /etc/grid-security/vomsdir/escape/voms-escape.cloud.cnaf.infn.it.lsc
 
 # Setup merged CERN CA file on Ubuntu based images.
 # This file is contained in the `CERN-bundle.pem` file downloaded using 
-# RUN mkdir /certs \
-#     && touch /certs/rucio_ca.pem \
-#     && curl -fsSL 'https://cafiles.cern.ch/cafiles/certificates/CERN%20Root%20Certification%20Authority%202.crt' | openssl x509 -inform DER -out /tmp/cernrootca2.crt \
-#     && curl -fsSL 'https://cafiles.cern.ch/cafiles/certificates/CERN%20Grid%20Certification%20Authority(1).crt' -o /tmp/cerngridca.crt \
-#     && curl -fsSL 'https://cafiles.cern.ch/cafiles/certificates/CERN%20Certification%20Authority.crt' -o /tmp/cernca.crt \
-#     && cat /tmp/cernrootca2.crt >> /certs/rucio_ca.pem \
-#     && cat /tmp/cerngridca.crt >> /certs/rucio_ca.pem \
-#     && cat /tmp/cernca.crt >> /certs/rucio_ca.pem \
-#     && rm /tmp/*.crt \
-#     && update-ca-certificates
+RUN mkdir /certs \
+    && touch /certs/rucio_ca.pem \
+    && curl -fsSL 'https://cafiles.cern.ch/cafiles/certificates/CERN%20Root%20Certification%20Authority%202.crt' | openssl x509 -inform DER -out /tmp/cernrootca2.crt \
+    && curl -fsSL 'https://cafiles.cern.ch/cafiles/certificates/CERN%20Grid%20Certification%20Authority(1).crt' -o /tmp/cerngridca.crt \
+    && curl -fsSL 'https://cafiles.cern.ch/cafiles/certificates/CERN%20Certification%20Authority.crt' -o /tmp/cernca.crt \
+    && cat /tmp/cernrootca2.crt >> /certs/rucio_ca.pem \
+    && cat /tmp/cerngridca.crt >> /certs/rucio_ca.pem \
+    && cat /tmp/cernca.crt >> /certs/rucio_ca.pem \
+    && rm /tmp/*.crt \
+    && update-ca-certificates
 
 # Setup extension Rucio instance config
 ADD configure.py /opt/setup-rucio-jupyterlab/configure.py
@@ -155,11 +155,11 @@ RUN pip install msgpack
 
 ############## elena 
 
-# RUN mkdir -p /opt/conda/share/jupyter/kernels/root \
-#     && cp -r /opt/root/etc/notebook/kernels/root/kernel.json /opt/conda/share/jupyter/kernels/root/kernel.json
+RUN mkdir -p /opt/conda/share/jupyter/kernels/root \
+    && cp -r /opt/root/etc/notebook/kernels/root/kernel.json /opt/conda/share/jupyter/kernels/root/kernel.json
 
- #RUN conda install -c conda-forge metakernel # conda complains, installing though pip
-RUN pip install metakernel
+ RUN conda install -c conda-forge metakernel # conda complains, installing though pip
+# RUN pip install metakernel
 
 
 
