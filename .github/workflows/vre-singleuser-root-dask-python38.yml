@@ -12,7 +12,7 @@ env:
 
   REGISTRY: ghcr.io
 
-  IMAGE_NAME: ${{ github.repository }}-$CONTAINER
+  IMAGE_NAME: $CONTAINER
 
 
 jobs:
