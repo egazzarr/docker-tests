@@ -9,7 +9,7 @@ USER root
 
 # Install ROOT
 ENV LANG=C.UTF-8	
-ARG ROOT_BIN=root_v6.30.02.Linux-almalinux9.3-x86_64-gcc11.4.tar.gz
+ARG ROOT_BIN=root_v6.30.02.Linux-almalinux9.3-x86_64-gcc11.4.tar.gz 
 
 WORKDIR /opt
 
