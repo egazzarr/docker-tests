@@ -1,19 +1,18 @@
-name: vre-singleuser-root-dask-python38
+name: vre-singleuser-root-dask
 
 on:
   push:
     branches: 
       - main
     paths:
-      - vre-singleuser-root-dask-python38/**
+      - vre-singleuser-root-dask/**
 
 env:
-  CONTAINER: vre-singleuser-root-dask-python38
-
+  CONTAINER: vre-singleuser-root-dask
+  # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
-
+  # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}-$CONTAINER
-
 
 jobs:
   build:
@@ -56,3 +55,4 @@ jobs:
           docker tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${tag_describe}
           docker push  ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${tag_describe}
           rm -rf docker-tests
+
