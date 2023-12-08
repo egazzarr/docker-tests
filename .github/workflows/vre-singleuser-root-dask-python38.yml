@@ -2,12 +2,19 @@ name: VRE dask root pytho38
 
 # Build image with changes to any file within containers/base-ops/
 # and when a new tag is created.
+# on:
+#   push:
+#     paths:
+#       - vre-singleuser-root-dask-python38/**
+#     tags:
+#       - '**'
+
 on:
   push:
+    branches: 
+      - main
     paths:
       - vre-singleuser-root-dask-python38/**
-    tags:
-      - '**'
 
 env:
   CONTAINER: vre-singleuser-root-dask-python38
