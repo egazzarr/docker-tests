@@ -51,12 +51,12 @@ jobs:
 
       - name: Build and push Docker image
         id: build-and-push
-        working-directory: $CONTAINER
+        working-directory: ${{ env.CONTAINER }}
         run: |
           docker build --build-arg BUILD_DATE=$(date +'%Y-%m-%dT%H:%M:%SZ') --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest .
           docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           git clone https://github.com/egazzarr/docker-tests/
-          cd $CONTAINER
+          cd ${{ env.CONTAINER }}
           # Echo the output, substitute the `-g` with a `-` and export the result.
           # The `-g` is by default on git describe because of historical reasons.
           echo "tag_describe is $(git describe --tags | sed 's/-g/-/g')"
@@ -64,5 +64,5 @@ jobs:
           # cd ..
           docker tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${tag_describe}
           docker push  ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${tag_describe}
-          rm -rf $CONTAINER
+          rm -rf ${{ env.CONTAINER }}
           
