@@ -31,7 +31,9 @@ ENV PYTHONPATH $ROOTSYS/lib:$PYTHONPATH
 ENV CLING_STANDARD_PCH none
 
 
-USER $NB_UID
+# USER $NB_UID
+
+USER root 
 
 RUN conda install -y -c conda-forge python-gfal2 \
     && conda clean --all -f -y
