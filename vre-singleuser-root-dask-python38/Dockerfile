@@ -9,7 +9,7 @@ USER root
 # USER $NB_UID
 
 RUN pip install dask\
-    && pip install distributed \
+    && pip install distributed \ 
     && pip install dask-gateway\ 
     && pip install jupyter-server-proxy \
     && jupyter serverextension enable --sys-prefix jupyter_server_proxy \
