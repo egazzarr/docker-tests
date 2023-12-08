@@ -6,11 +6,11 @@ LABEL org.label-schema.build-date=$BUILD_DATE
 
 WORKDIR $HOME
 USER root
-USER $NB_UID
+# USER $NB_UID
 
 RUN pip install dask\
     && pip install distributed \
-    && pip install dask-gateway\
+    && pip install dask-gateway\ 
     && pip install jupyter-server-proxy \
     && jupyter serverextension enable --sys-prefix jupyter_server_proxy \
     && pip install dask-labextension==6.2.0 
