@@ -16,6 +16,6 @@ RUN pip install dask\
     && pip install dask-labextension==6.2.0 
  
 WORKDIR $HOME
-USER $NB_UID
+USER $NB_UID 
 
 CMD ["setup.sh", "start-notebook.sh"]
