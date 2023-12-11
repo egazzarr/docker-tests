@@ -8,8 +8,8 @@ WORKDIR $HOME
 USER root
 # USER $NB_UID
 
-RUN pip install dask\
-    && pip install distributed \ 
+RUN pip install dask==2022.6.0 \
+    && pip install distributed==2022.6.0 \ 
     && pip install dask-gateway\ 
     && pip install jupyter-server-proxy \
     && jupyter serverextension enable --sys-prefix jupyter_server_proxy \
